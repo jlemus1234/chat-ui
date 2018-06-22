@@ -73,11 +73,11 @@ class MessageCreation extends React.Component {
     message: this.state.message})
     event.preventDefault();
 
-    //{this.message};
   }
 
   render() {
     return (
+      <div id = "input">
       <form onSubmit={this.handleSubmit}>
         <label>
           Username:
@@ -91,12 +91,13 @@ class MessageCreation extends React.Component {
           Message:
           <input
             name="message"
-            type="text"
+            type="textarea"
             onChange={this.handleMsgChange} />
         </label>
         <button type="submit" value="Submit" />
 
       </form>
+      </div>
     );
   }
 }

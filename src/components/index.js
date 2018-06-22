@@ -1,3 +1,4 @@
+//This is your top level React component, you may change everything
 
 import React, { Component } from 'react';
 import logo from '../assets/spotim-logo.jpg';
@@ -65,7 +66,14 @@ class App extends Component {
           console.log(msg.message);
 
     return(
-      <li> {msg.avatar} {msg.username} {msg.message} </li>
+    <div id = "msgDisplay">
+      <ul>
+        <li> {msg.avatar} </li>
+        <li>  {msg.username} </li>
+        <li> {msg.message} </li>
+      </ul>
+      <br></br>
+    </div>
     )
   })
 
@@ -88,13 +96,12 @@ class App extends Component {
           </Logo>
         </div>
       </Container>
-      <div style = {{textAlign:"center" }}>
-        <ul>
+      <div id = "chatWindow">
+        <ul id = "row">
           {namesList}
         </ul>
       </div>
-      <div>
-        <p> Message Creation</p>
+      <div id = "write">
         <MessageCreation/>
 
       </div>
@@ -107,4 +114,3 @@ class App extends Component {
 export default App;
 
 
-//This is your top level React component, you may change everything

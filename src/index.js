@@ -20,6 +20,7 @@ var data = {
 }
 
 
+
 //connecting to Socket.IO chat server
 const socket = io("https://spotim-demo-chat-server.herokuapp.com");
 socket.on("connect", function() {
@@ -35,19 +36,16 @@ function registerHandler(onMessageReceived){
 	socket.on('spotim/chat', onMessageReceived)
 }
 
-function message(msg){
-	socket.emit('spotim/chat', {avatar: prof, username: user, message: msg})
-}
-
-
+//function message(msg){
+//	socket.emit('spotim/chat', {avatar: prof, username: user, message: msg})
+//}
 
 socket.on('spotim/chat', function(msg){
     console.log('message: ' + msg);
 });
 
 //socket.emit('spotim/chat', 'test', console.log('sent it'));
-
-socket.emit ('spotim/chat', data, console.log('sent it'));
+//socket.emit ('spotim/chat', data, console.log('sent it'));
 
 socket.on('spotim/chat', function(msg){
 	console.log("message:" + msg);

@@ -10,12 +10,50 @@ body {
     color: white;
     .spotim-title {
       font-size: 1.5em;
-    }
+    } 
   }
+
+
+}
+
+div {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#input{
+  margin: auto;
+
+}
+
+#chatWindow {
+  padding: 20px;
+  margin: auto;
+  text-align: center;
+  border: 1px;
+}
+
+#chat {
+  text-align:center; 
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
 }
 
 
+li {
+  padding: 20px;
+  width:33%;
+  float: left;
+}
 
-
-
+#write {
+height:100px;
+  width:100%;
+  padding: 20px;
+}
 
