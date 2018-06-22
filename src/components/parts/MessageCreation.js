@@ -3,10 +3,6 @@ import React from 'react';
 import io from "socket.io-client";
 var $ = require('jquery');
 
-
-var usernameSubmit = "";
-
-
 const socket = io("https://spotim-demo-chat-server.herokuapp.com");
 
 class MessageCreation extends React.Component {
