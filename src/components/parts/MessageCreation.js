@@ -1,10 +1,10 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import io from "socket.io-client";
+var $ = require('jquery');
 
 
 var usernameSubmit = "";
-var messageSubmit = "";
 
 
 const socket = io("https://spotim-demo-chat-server.herokuapp.com");
@@ -30,48 +30,31 @@ class MessageCreation extends React.Component {
 
   handleInputChange(event) {
     const target = event.target;
-    //const value = target.type === 'checkbox' ? target.checked : target.value;
     const value = target.value;
     const name = target.name;
 
     this.setState({
       [name]: value
     });
-    console.log(this.state.username);
-    console.log(this.state.message);
-    console.log(value);
-
-    //usernameSubmit = value;
-
   }
 
 
     handleMsgChange(event) {
     const target = event.target;
-    //const value = target.type === 'checkbox' ? target.checked : target.value;
     const value = target.value;
     const name = target.name;
 
     this.setState({
       [name]: value
     });
-    console.log(this.state.username);
-    console.log(this.state.message);
-    console.log(value);
-
-    //usernameSubmit = value;
-
   }
 
   handleSubmit(event){
-        event.preventDefault();
-
-    console.log(this.state.username);
-    console.log(this.state.message);
-    alert("it works");
-    socket.emit('spotim/chat', {avatar: "default", username: this.state.username,
-    message: this.state.message})
     event.preventDefault();
+    socket.emit('spotim/chat', {avatar: "Portrait", username: this.state.username,
+    text: this.state.message})
+    $('#txta').val('');
+
 
   }
 
@@ -80,22 +63,24 @@ class MessageCreation extends React.Component {
       <div id = "input">
       <form onSubmit={this.handleSubmit}>
         <label>
-          Username:
           <input
             name="username"
             type="text"
+            placeholder="Username"
             onChange={this.handleInputChange} />
         </label>
         <br />
         <label>
-          Message:
-          <input
+          <textarea id = "txta" rows = "4" cols = "50"
             name="message"
             type="textarea"
-            onChange={this.handleMsgChange} />
+            placeholder = "Message"
+            onChange={this.handleMsgChange} required>
+            </textarea>
         </label>
-        <button type="submit" value="Submit" />
-
+        <button id = "submit" type="submit" value="Submit">
+        Send
+        </button>
       </form>
       </div>
     );
@@ -103,3 +88,5 @@ class MessageCreation extends React.Component {
 }
 
 export default MessageCreation;
+
+

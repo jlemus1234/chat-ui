@@ -5,18 +5,7 @@ import logo from '../assets/spotim-logo.jpg';
 import {Container, Image} from 'semantic-ui-react';
 import styled from 'styled-components';
 import MessageCreation from './parts/MessageCreation';
-
 import io from "socket.io-client";
-//const socket = io("https://spotim-demo-chat-server.herokuapp.com");
-
-
-//var user = "User"
-//var prof = "Default"
-//var data = {
- //   avatar: prof,
-//    username: user,
-//    message: 'test'
-//}
 
 
 var allMsgs = [];
@@ -45,12 +34,6 @@ class App extends Component {
   componentDidMount() {
     const {endpoint } = this.state;
     const socket = io(endpoint);
-//    socket.on("spotim/chat", function(msg){
-//      console.log(msg);
-//      this.setState({messages:msg})
-//    }
-//    )
-//  }
 
     socket.on("spotim/chat", msg => 
       this.setState({messages: msg}));
@@ -59,30 +42,18 @@ class App extends Component {
   render() {
     const {messages} = this.state;
     allMsgs.push(messages);
-    console.log(allMsgs);
     const namesList = allMsgs.map(msg=> {
-          console.log("In map: " + msg.username);
-          console.log(msg.avatar);
-          console.log(msg.message);
-
     return(
     <div id = "msgDisplay">
       <ul>
-        <li> {msg.avatar} </li>
+        <li class = "portrait"> {msg.avatar} </li>
         <li>  {msg.username} </li>
-        <li> {msg.message} </li>
+        <li> {msg.text} </li>
       </ul>
       <br></br>
     </div>
     )
   })
-
-//    const {namesList} = messages.map(name => {
-//    return (
-//      <li> {name.username} </li>
-//    )
-//  })
-
 
     return (
     <div className="App">
@@ -103,7 +74,6 @@ class App extends Component {
       </div>
       <div id = "write">
         <MessageCreation/>
-
       </div>
             
     </div>
