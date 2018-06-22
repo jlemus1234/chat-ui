@@ -1,50 +1,101 @@
 
 import React, { Component } from 'react';
 import io from "socket.io-client";
-//const socket = io("https://spotim-demo-chat-server.herokuapp.com");
 
+
+var usernameSubmit = "";
+var messageSubmit = "";
+
+
+const socket = io("https://spotim-demo-chat-server.herokuapp.com");
 
 class MessageCreation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isGoing: true,
-      numberOfGuests: 2
+      username: "",
+      message : ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleMsgChange = this.handleMsgChange.bind(this);
+
+  }
+
+  message(){
+    socket.emit('spotim/chat', {avatar: "default", username: this.state.username,
+    message: this.state.messsage})
   }
 
   handleInputChange(event) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    //const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.value;
     const name = target.name;
 
     this.setState({
       [name]: value
     });
+    console.log(this.state.username);
+    console.log(this.state.message);
+    console.log(value);
+
+    //usernameSubmit = value;
+
+  }
+
+
+    handleMsgChange(event) {
+    const target = event.target;
+    //const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+    console.log(this.state.username);
+    console.log(this.state.message);
+    console.log(value);
+
+    //usernameSubmit = value;
+
+  }
+
+  handleSubmit(event){
+        event.preventDefault();
+
+    console.log(this.state.username);
+    console.log(this.state.message);
+    alert("it works");
+    socket.emit('spotim/chat', {avatar: "default", username: this.state.username,
+    message: this.state.message})
+    event.preventDefault();
+
+    //{this.message};
   }
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <label>
-          Is going:
+          Username:
           <input
-            name="isGoing"
-            type="checkbox"
-            checked={this.state.isGoing}
+            name="username"
+            type="text"
             onChange={this.handleInputChange} />
         </label>
         <br />
         <label>
-          Number of guests:
+          Message:
           <input
-            name="numberOfGuests"
-            type="number"
-            value={this.state.numberOfGuests}
-            onChange={this.handleInputChange} />
+            name="message"
+            type="text"
+            onChange={this.handleMsgChange} />
         </label>
+        <button type="submit" value="Submit" />
+
       </form>
     );
   }

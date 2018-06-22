@@ -9,6 +9,15 @@ import io from "socket.io-client";
 //const socket = io("https://spotim-demo-chat-server.herokuapp.com");
 
 
+//var user = "User"
+//var prof = "Default"
+//var data = {
+ //   avatar: prof,
+//    username: user,
+//    message: 'test'
+//}
+
+
 var allMsgs = [];
 
 

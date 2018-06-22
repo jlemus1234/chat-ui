@@ -19,13 +19,6 @@ var data = {
 		message: 'test'
 }
 
-function registerHandler(onMessageReceived){
-	socket.on('spotim/chat', onMessageReceived)
-}
-
-function message(msg){
-	socket.emit('spotim/chat', {avatar: prof, username: user, message: msg})
-}
 
 //connecting to Socket.IO chat server
 const socket = io("https://spotim-demo-chat-server.herokuapp.com");
@@ -36,6 +29,16 @@ socket.on("connect", function() {
 socket.on("disconnect", function() {
   console.log("disconnected from chat server!");
 });
+
+
+function registerHandler(onMessageReceived){
+	socket.on('spotim/chat', onMessageReceived)
+}
+
+function message(msg){
+	socket.emit('spotim/chat', {avatar: prof, username: user, message: msg})
+}
+
 
 
 socket.on('spotim/chat', function(msg){
