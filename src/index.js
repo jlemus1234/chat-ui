@@ -8,7 +8,24 @@ import "./index.scss";
 import App from "./components";
 import io from "socket.io-client";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+	<App />, document.getElementById("root"));
+
+var user = "User"
+var prof = "Default"
+var data = {
+		avatar: prof,
+		username: user,
+		message: 'test'
+}
+
+function registerHandler(onMessageReceived){
+	socket.on('spotim/chat', onMessageReceived)
+}
+
+function message(msg){
+	socket.emit('spotim/chat', {avatar: prof, username: user, message: msg})
+}
 
 //connecting to Socket.IO chat server
 const socket = io("https://spotim-demo-chat-server.herokuapp.com");
@@ -25,11 +42,9 @@ socket.on('spotim/chat', function(msg){
     console.log('message: ' + msg);
 });
 
-//socket.on('message', function(msg){
-//    console.log('message: ' + msg);
-//});
+//socket.emit('spotim/chat', 'test', console.log('sent it'));
 
-socket.emit('spotim/chat', 'test', console.log('sent it'));
+socket.emit ('spotim/chat', data, console.log('sent it'));
 
 socket.on('spotim/chat', function(msg){
 	console.log("message:" + msg);
